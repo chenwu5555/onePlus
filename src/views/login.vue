@@ -36,13 +36,14 @@ export default {
     //   })
   },
   methods:{
-
     //   去首页
     toHome(){
         console.log(this.$http,"查看this.$http");
         this.$http.manageRt.postHttp(this.ruleForm).then(res=>{
           console.log(res.data,"查看res");
           if(res.data.meta.status == 200){
+            let toKen = res.data.data.token
+            window.localStorage.setItem("token", toKen)
               this.$router.push({
                   path:'/home'
               })

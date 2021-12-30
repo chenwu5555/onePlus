@@ -9,9 +9,27 @@ export default {
   name:"home",
   data(){
     return {
+      // 分页参数
+      paging:{
+        query:'',
+        pagenum:1,
+        pagesize:10,
+      }
     }
   },
+  created(){
+    this.getUserData()
+  },
   methods:{
+    getUserData(){
+      this.$http.manageRt.getHttp(this.paging).then(res =>{
+        if(res.data.meta.status === 200){
+          this.$message.success(res.data.meta.msg)
+        }else{
+          this.$message.error(res.data.meta.msg)
+        }
+      })
+    },
     toReturn(){
       this.$router.push({
         path:"/login",
